@@ -2,6 +2,7 @@ language: node_js
 node_js:
 - '14'
 script:
+- cd userapi
 - echo 'Starting'
 - npm install
 - echo 'Testing'
