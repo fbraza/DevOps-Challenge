@@ -21,9 +21,9 @@ describe('User REST API', () => {
 
     it('create a new user', (done) => {
       const user = {
-        username: 'sergkudinov',
-        firstname: 'Sergei',
-        lastname: 'Kudinov'
+        username: 'juchesne',
+        firstname: 'Julie',
+        lastname: 'Chesne'
       }
       chai.request(app)
         .post('/user')
@@ -35,7 +35,7 @@ describe('User REST API', () => {
           done()
         })
         .catch((err) => {
-           throw err
+          throw err
         })
     })
     
