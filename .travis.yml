@@ -1,9 +1,11 @@
 language: node_js
 node_js:
-- '14'
+    - '14'
+service:
+    - redis-server
 script:
-- cd userapi
-- echo 'Starting'
-- npm install
-- echo 'Testing'
-- npm test
+    - cd userapi
+    - echo 'Starting'
+    - npm install
+    - echo 'Testing'
+    - npm test
