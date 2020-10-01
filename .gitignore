@@ -52,6 +52,8 @@ typings/
 
 # Optional eslint cache
 .eslintcache
+.eslintignore
+.eslintrc.json
 
 # Microbundle cache
 .rpt2_cache/
@@ -102,3 +104,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# package json
+package-lock.json
