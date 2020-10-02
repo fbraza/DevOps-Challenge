@@ -4,7 +4,6 @@ node_js:
 service:
     - redis-server
 script:
-    - cd userapi
     - echo 'Starting'
     - npm install
     - echo 'Testing'
