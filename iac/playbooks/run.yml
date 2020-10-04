@@ -1,0 +1,8 @@
+---
+- hosts: centos_server
+  # Run commands as root
+  become: true
+  # Roles to be executed on these hosts
+  roles:
+  - role: app/install
+    tags: install
