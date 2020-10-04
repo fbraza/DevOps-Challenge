@@ -19,13 +19,10 @@
 
 - name: Enable HTTP+HTTPS access
   firewalld:
-    # This is how we use a variable
     service: "{{ item }}"
     permanent: yes
     state: enabled
-  # The module will be run for each item
   with_items:
-  # loop:
     - http
     - https
 
@@ -34,7 +31,6 @@
     name: redis
     state: started
     enabled: yes
-
 
 - name: Download nodejs setup
   get_url:
@@ -48,3 +44,16 @@
 - name: Install Nodejs14
   yum:
     name: nodejs
+
+- name: Clone our private repo
+  git:
+    repo: git@github.com:fbraza/devops-project-dsti-fall-2020.git    
+    dest: /home/vagrant/private-repo
+    accept_hostkey: yes
+  become: no
+
+
+- name: Install packages for app
+  shell: npm install
+  args:
+    chdir: /home/vagrant/private-repo
