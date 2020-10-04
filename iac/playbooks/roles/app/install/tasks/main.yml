@@ -1,0 +1,50 @@
+---
+- name: Install required packages
+  yum:
+    name:
+      - "@Development tools"
+      - curl
+      - policycoreutils-python
+      - openssh-server
+      - git
+      - epel-release
+      - redis
+    state: latest
+
+- name: Enable and start sshd
+  service:
+    name: sshd
+    state: started
+    enabled: yes
+
+- name: Enable HTTP+HTTPS access
+  firewalld:
+    # This is how we use a variable
+    service: "{{ item }}"
+    permanent: yes
+    state: enabled
+  # The module will be run for each item
+  with_items:
+  # loop:
+    - http
+    - https
+
+- name: Enable and start Redis
+  service:
+    name: redis
+    state: started
+    enabled: yes
+
+
+- name: Download nodejs setup
+  get_url:
+    url: https://rpm.nodesource.com/setup_14.x
+    dest: /home/vagrant/.ansible/tmp
+
+- name: Build source and add repo
+  shell: bash /home/vagrant/.ansible/tmp/setup_14.x
+  become: yes
+
+- name: Install Nodejs14
+  yum:
+    name: nodejs

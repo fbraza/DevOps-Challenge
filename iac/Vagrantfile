@@ -1,0 +1,31 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+Vagrant.configure("2") do |config|
+  if Vagrant.has_plugin?("vagrant-vbguest")
+    config.vm.provider :virtualbox do |vb|
+      config.vbguest.auto_update = true
+    end
+  end
+
+  config.vm.define "centos_server" do |server|
+    config.vm.box = "centos/7"
+    config.vm.network "private_network", ip: "192.168.33.10"
+    config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+    config.vm.provider "virtualbox" do |vb|
+      vb.name = "node.app.local"
+      vb.memory = 4096
+      vb.cpus = 2
+    end
+  end
+
+  config.vm.provision "ansible_local" do |ansible|
+    # The path to the playbooks entry point
+    ansible.playbook = "playbooks/run.yml"
+    # Only run the roles with these tags
+    # Ansible allows you to only run some parts of the code using tags
+    # Use the tag install if gitlab is not install in your VM
+    ansible.tags = "install"
+  end
+end
