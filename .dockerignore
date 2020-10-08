@@ -1,0 +1,10 @@
+.eslintignore
+.eslintrc.json
+.gitignore
+.travis.yml
+CHANGELOG.md
+LICENSE
+READMDE.md
+node_modules/
+iac/
+.git/

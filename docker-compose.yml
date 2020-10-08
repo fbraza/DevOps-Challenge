@@ -1,0 +1,17 @@
+version: "3"
+services:
+    web:
+        depends_on:
+            - db
+        build: .
+        ports:
+            - "3000:3000"
+        environment:
+            NODE_ENV: production
+            REDIS_HOST: db:6379
+        links:
+            - "db"
+        command: bash -c "npm install && npm start"
+    db:
+        image: docker.io/redis
+
