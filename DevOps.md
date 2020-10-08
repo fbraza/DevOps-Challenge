@@ -2,7 +2,9 @@
 
 1. SSH forwarding for private `github` repository
 2. Test with JavaScript
-3. Making the app communicate using docker. The containerization of the app was smooth with the following `Dockerfile`.
+3. Making the app communicate using docker. 
+
+The containerization of the app was smooth with the following `Dockerfile`.
 
 ```yml
 FROM node:14
@@ -99,11 +101,13 @@ docker network inspect -f '{{range .IPAM.Config}}{{.Subnet}}{{end}}' 97ac9110596
 
 One trick that works is to directly modify the `conf.default.json` file and specify the host as `redis`. By doing this we precise the DNS name and where to find it when using docker. The problem is that I have to alter the `config` file which then impacts the way the node app behaves locally.
 
-```javascript
-const client = redis.createClient({
-        port      : 6379,
-        host      : 'redis'
-});
+```json
+{
+    "redis": {
+        "host": "127.0.0.1",
+        "port": 6739
+    }
+}
 ```
 
 
