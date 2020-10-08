@@ -12,7 +12,7 @@ deploy:
   provider: heroku
   api_key:
     secure: BN9JVEB8zrbr17z+TnRiUYcBIyg/IWbxZUUokddwgVQkJssFxc8iXlAZkQyzwFzfv0io/p8f+Mot/oFExx3PWQSxR+ShYa8jblVduTfDys+U7fRfTNAd6YoO9bpY6dErKJBTepMXntb5XVIqS7aZ4tYDpzWDcZ8pV7uDJUVP6HX1I/+89SZNdCtjziTMYY4LaQzN8R3QuAvycS7eC51zg0GxM+A5SqzkNL0lNejyXSfbGatUZoHs8Za/QO0JcjthiSlqfV0pLg6AZuHnkrm+S8eLxpzwXUSAAO62BuGd324qhwoijsodiyBocIcwe75hlawsqPd1AyICv2ZkK/vP95+AdSmXn1kDAVzE/hkhI7opmCCAitDXJY+8WEG87w50mTrAEp/F9K0r5hP/fVLVNvvZYN1YsNn5Yvfd6+fo8c9+D2sNinbsfoK+OXr541Q+IGyxwCIGO71CQlV500BWV/s+Ft/gRQbpAvZMHp+xg0SjkXRLnGWOeBWzHqVnpO9llFWEK7+m1Iuo2vUEi0AtTf7qVF4Vi4/jgNt3P6Euy0jfyLahLE8EP+3mixxD6FdUkJCqFFjid645pFEbuspqR4MxIi2t0be6b/cQIZySQ3hipHEcbpnUMzODpLsDaih39QgtxsmNmN9dVd0gDgRsevcwgakl3wEaLa9O/Yu2NpA=
-  app: app_devops
+  app: faouzi-app-devops
   on:
     repo: fbraza/devops-project-dsti-fall-2020
     branch: features_app
