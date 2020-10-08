@@ -16,5 +16,5 @@ deploy:
   app: faouzi-app-devops
   on:
     repo: fbraza/devops-project-dsti-fall-2020
-    branch: features_app
+    branch: main
   skip_cleanup: 'true'
