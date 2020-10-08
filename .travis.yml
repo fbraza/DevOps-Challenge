@@ -5,6 +5,7 @@ service:
 - redis-server
 script:
 - echo 'Starting'
+- cd cicd
 - npm install
 - echo 'Testing'
 - npm test
