@@ -4,7 +4,10 @@
 .travis.yml
 CHANGELOG.md
 LICENSE
-READMDE.md
+README.md
+Dockerfile
 node_modules/
 iac/
+docker-compose.yml
+DevOps.md
 .git/

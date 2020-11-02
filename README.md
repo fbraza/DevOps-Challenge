@@ -1,68 +1,46 @@
-# User API web application
+# DevOps assignment
 
-It is a basic NodeJS web application exposing REST API that creates and stores user parameters in [Redis database](https://redis.io/).
 
-## Functionality
 
-1. Start a web server
-2. Create a user
+## Tasks fulfilled
 
-## Installation
+- [ ]  **Create a web application**
 
-This application is written on NodeJS and it uses Redis database.
+  - [x] Complete code
+  - [ ] Complete all tests (missed one)
 
-1. [Install NodeJS](https://nodejs.org/en/download/)
+- [x] **Apply CI/CD pipeline**
 
-2. [Install Redis](https://redis.io/download)
+  - [x] Travis CI with testing
+  - [x] Deployment on Heroku
 
-3. Install application
+- [ ] **Configure and provision a virtual environment and run your application using IaC approach**
 
-Go to the root directory of the application (where `package.json` file located) and run:
+  - [x] Configure with Vagrant, 1 VM with centOS v7
+  - [ ] Provision the VM with Ansible for:
+    - [x] Language runtime
+    - [x] Database
+    - [x] Git (ssh forwarding for private repository)
+    - [x] My application
+    - [ ] Health-check
 
-```
-npm install 
-```
+- [x] **Build Docker image of your application**
 
-## Usage
+  - [x] Create Docker image
+  - [x] Push the image (https://hub.docker.com/repository/docker/fbraza/webapp-v1)
+  - [x] Ignore unnecessary files 
 
-1. Start a web server
+- [x] **Make container orchestration using Docker Compose**
 
-From the root directory of the project run:
+  - [x] Create a `docker-compose.yml` file with that will start your application
+  - [x] Right ENV variables (*Sergei pull request*)
+  - [x] Attach volume to save database data
 
-```
-npm start
-```
+- [ ] **Make docker orchestration using Kubernetes**
 
-It will start a web server available in your browser at http://localhost:3000.
+- [ ] **Make a service mesh using Istio**
 
-2. Create a user
+- [ ] **Describe your project in the `README.md` file**
 
-Send a POST (REST protocol) request using terminal:
+  
 
-```bash
-curl --header "Content-Type: application/json" \
-  --request POST \
-  --data '{"username":"sergkudinov","firstname":"sergei","lastname":"kudinov"}' \
-  http://localhost:3000/user
-```
-
-It will output:
-
-```
-{"status":"success","msg":"OK"}
-```
-
-Or, you can use [Postman](https://www.postman.com/) to test a REST API.
-
-## Testing
-
-From the root directory of the project run:
-
-```
-npm test
-```
-
-## Author
-
-Sergei Kudinov   
-sergei@adaltas.com

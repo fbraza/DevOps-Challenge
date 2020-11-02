@@ -11,7 +11,8 @@ services:
             - REDIS_PORT=6379
         links:
             - "redis"
-        command: bash -c "npm install && npm start"
     redis:
         image: docker.io/redis
+        volumes:
+          - .redisDB/:/data
 
