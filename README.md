@@ -28,7 +28,7 @@
 
   - [x] Create Docker image
   - [x] Push the image (https://hub.docker.com/repository/docker/fbraza/webapp-v1)
-  - [x] Ignore unnecessary files 
+  - [x] Ignore unnecessary files (`COMPOSE_DOCKER_CLI_BUILD=1 docker-compose build`)
 
 - [x] **Make container orchestration using Docker Compose**
 

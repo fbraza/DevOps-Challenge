@@ -9,5 +9,6 @@ Dockerfile
 node_modules/
 iac/
 docker-compose.yml
+deployment.yml
 DevOps.md
 .git/
