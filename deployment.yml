@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: faouzi-webapp
+  labels:
+    app: faouzi-webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: faouzi-webapp
+  template:
+    metadata:
+      labels:
+        app: faouzi-webapp
+    spec:
+      containers:
+        - image: fbraza/webapp-v1
+          name: node-app
+          ports:
+            - containerPort: 3000
+        - image: docker.io/redis
+          name: redis-db
+          ports:
+            - containerPort: 6379
+

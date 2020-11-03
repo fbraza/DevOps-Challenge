@@ -38,6 +38,11 @@
 
 - [ ] **Make docker orchestration using Kubernetes**
 
+  - [ ] Install Kubernetes cluster using Minikube
+  - [ ] Create Kubernetes deployment YAML file
+  - [ ] Create Kubernetes service YAML files
+  - [ ] Create Kubernetes persistent volume and persistent volume claim YAML files
+
 - [ ] **Make a service mesh using Istio**
 
 - [ ] **Describe your project in the `README.md` file**
