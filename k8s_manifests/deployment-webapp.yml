@@ -19,3 +19,6 @@ spec:
           name: node-app
           ports:
             - containerPort: 3000
+          env:
+            - name: REDIS_HOST
+              value: redisdb://redis-service:6379

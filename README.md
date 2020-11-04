@@ -38,10 +38,14 @@
 
 - [ ] **Make docker orchestration using Kubernetes**
 
-  - [ ] Install Kubernetes cluster using Minikube
-  - [ ] Create Kubernetes deployment YAML file
-  - [ ] Create Kubernetes service YAML files
-  - [ ] Create Kubernetes persistent volume and persistent volume claim YAML files
+  - [x] Install Kubernetes cluster using Minikube
+  - [x] Create Kubernetes deployment YAML file (test curl with minikube ssh)
+
+`kubectl get pods faouzi-webapp-55976475f9-94jv8 -o jsonpath='{.spec.containers[*].name}'`
+
+- [ ] Create Kubernetes service YAML files
+
+- [ ] Create Kubernetes persistent volume and persistent volume claim YAML files
 
 - [ ] **Make a service mesh using Istio**
 
