@@ -146,8 +146,63 @@ This will set up two distinct pods in our cluster. One pod will run our applicat
 
 **Usage**
 
-To access the web server, create and get user data you first need to get IP address of the running cluster by using the following command:
+To access the web server, create and get user data you first need to get the IP address of the running cluster. Because you are going to use it 
+several time in your `curl` command, you can save it in a variable by running the following command:
 
 ```bash
-minikube ip
+CLUSTER_IP=$(minikube ip)
 ```
+
+To expose the container in our pods we created Kubernetes services manifests and open a NodePort. To get the node port of our app we can run the
+following command:
+
+```bash
+kubectl get svc
+```
+
+This shoudl output something similar to:
+
+```bash
+NAME                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+faouzi-webapp-service   NodePort    10.102.58.222   <none>        3000:30867/TCP   5s
+kubernetes              ClusterIP   10.96.0.1       <none>        443/TCP          2d9h
+redis-service           NodePort    10.98.127.167   <none>        6379:31048/TCP   5s
+```
+
+Looking at the service named `faouzi-webapp-service` we can quickly find the node port which is `30867`. Save it to a bash variable
+
+```bash
+PORT=30867
+```
+
+Then to interact with the web server you can run:
+
+```bash
+curl http://${CLUSTER_IP}:${PORT}
+```
+
+This should return:
+
+```bash
+Hello World!
+```
+
+You can then use the commands described previously to create users and get users' data but be careful to put the right ip and port. 
+Using the variables initialized previously should simplify the process:
+
+1. To create user
+
+```bash
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"username":"fbraza","firstname":"faouzi","lastname":"braza"}' \
+  http://${CLUSTER_IP}:${PORT}/user
+```
+
+2. To get user's data
+```bash
+curl http://${CLUSTER_IP}:${PORT}/user/fbraza
+```
+
+# Author
+Faouzi Braza
