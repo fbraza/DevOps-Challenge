@@ -21,4 +21,6 @@ spec:
             - containerPort: 3000
           env:
             - name: REDIS_HOST
-              value: redisdb://redis-service:6379
+              value: "redis-service"
+            - name: REDIS_PORT
+              value: "6379"

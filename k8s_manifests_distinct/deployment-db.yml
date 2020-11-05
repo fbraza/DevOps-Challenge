@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redis-db
+  name: redis-dpl
   labels:
     app: redis-db
 spec:
@@ -16,6 +16,14 @@ spec:
     spec:
       containers:
         - image: docker.io/redis
-          name: redis-db
+          name: redis
           ports:
             - containerPort: 6379
+          volumeMounts:
+            - name: redis-storage
+              mountPath: /mnt/data
+      volumes:
+        - name: redis-storage
+          persistentVolumeClaim:
+            claimName: redis-pv-claim
+

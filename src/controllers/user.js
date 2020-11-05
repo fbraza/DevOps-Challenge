@@ -11,7 +11,7 @@ module.exports = {
     }
     // Check if username exists
     client.exists(user.username, (err, res) => {
-        if (res === 1) {
+        if (res  ==1) {
             return callback(new Error("Warning: the user already exists"), null)
         } else {
             client.hmset(user.username, userObj, (error, response) => {

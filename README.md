@@ -41,6 +41,8 @@
   - [x] Install Kubernetes cluster using Minikube
   - [x] Create Kubernetes deployment YAML file (test curl with minikube ssh)
 
+`kubectl exec full-app-5c669d49dd-hnxcd -- printenv` >> env variables 
+
 `kubectl get pods faouzi-webapp-55976475f9-94jv8 -o jsonpath='{.spec.containers[*].name}'`
 
 - [ ] Create Kubernetes service YAML files
