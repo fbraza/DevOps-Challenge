@@ -1,57 +1,153 @@
-# DevOps assignment
+# User API web application
+
+It is a basic NodeJS web application exposing REST API that creates and stores user parameters in [Redis database](https://redis.io/).
 
 
 
-## Tasks fulfilled
+## Functionality
 
-- [ ]  **Create a web application**
+1. Start a web server
 
-  - [x] Complete code
-  - [ ] Complete all tests (missed one)
+2. Create a user
 
-- [x] **Apply CI/CD pipeline**
+3. Get user data
 
-  - [x] Travis CI with testing
-  - [x] Deployment on Heroku
+   > to implement: Delete
 
-- [ ] **Configure and provision a virtual environment and run your application using IaC approach**
 
-  - [x] Configure with Vagrant, 1 VM with centOS v7
-  - [ ] Provision the VM with Ansible for:
-    - [x] Language runtime
-    - [x] Database
-    - [x] Git (ssh forwarding for private repository)
-    - [x] My application
-    - [ ] Health-check
 
-- [x] **Build Docker image of your application**
+## Installation and usage
 
-  - [x] Create Docker image
-  - [x] Push the image (https://hub.docker.com/repository/docker/fbraza/webapp-v1)
-  - [x] Ignore unnecessary files (`COMPOSE_DOCKER_CLI_BUILD=1 docker-compose build`)
+This application is written on NodeJS and it uses Redis database. There are different scenarios to install and run the application. See below for their descriptions.
 
-- [x] **Make container orchestration using Docker Compose**
+### Local installation and usage
 
-  - [x] Create a `docker-compose.yml` file with that will start your application
-  - [x] Right ENV variables (*Sergei pull request*)
-  - [x] Attach volume to save database data
+**Installation**
 
-- [ ] **Make docker orchestration using Kubernetes**
+First check that both NodeJS and Redis are installed in your system. If not follow these two links and their respective installation guides:
 
-  - [x] Install Kubernetes cluster using Minikube
-  - [x] Create Kubernetes deployment YAML file (test curl with minikube ssh)
+- [Install NodeJS](https://nodejs.org/en/download/)
 
-`kubectl exec full-app-5c669d49dd-hnxcd -- printenv` >> env variables 
+- [Install Redis](https://redis.io/download)
 
-`kubectl get pods faouzi-webapp-55976475f9-94jv8 -o jsonpath='{.spec.containers[*].name}'`
+Once done you can clone or download the repository. Once in the root directory of the application (where `package.json` file located) run the following command:
 
-- [ ] Create Kubernetes service YAML files
+```bash
+npm install
+```
 
-- [ ] Create Kubernetes persistent volume and persistent volume claim YAML files
+**Usage**
 
-- [ ] **Make a service mesh using Istio**
+1. Start a web server
 
-- [ ] **Describe your project in the `README.md` file**
+From the root directory of the project run:
 
-  
+```bash
+npm start
+```
 
+It will start a web server available in your browser at http://localhost:3000.
+
+1. Create a user
+
+Send a POST (REST protocol) request using terminal:
+
+```bash
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"username":"fbraza","firstname":"faouzi","lastname":"braza"}' \
+  http://localhost:3000/user
+```
+
+It will output:
+
+```bash
+{"status":"success","msg":"OK"}
+```
+
+2. Get user's data
+
+```bash
+curl http://localhost:3000/user/fbraza
+```
+
+It will output:
+
+```bash
+{"status":"success","msg":{"firstname":"Faouzi","lastname":"Braza"}}
+```
+
+**Testing**
+
+From the root directory of the project, run:
+
+```bash
+npm test
+```
+
+
+
+### Docker installation and usage
+
+**Installation**
+
+First check that docker and docker-compose are installed in your system if not follow these links:
+
+- Install [docker](https://docs.docker.com/get-docker/)
+- Install [docker-compose](https://docs.docker.com/compose/install/)
+
+> docker-compose needs to be installed separately only for Linux user. It is included  as part of Mac and Windows desktop installs
+
+Once done you can clone or download the repository. Once in the root directory of the application (where `package.json` file located) run the following command:
+
+```bash
+COMPOSE_DOCKER_CLI_BUILD=1 docker-compose build
+```
+
+This will pull two images from the docker Hub ([Redis](https://hub.docker.com/_/redis), [our application](https://hub.docker.com/repository/docker/fbraza/webapp-v1)), build them, expose the relevant ports, mount the storage volumes. 
+
+> COMPOSE_DOCKER_CLI_BUILD=1 force the use of the Buildkit to build the containers faster. It also takes into account the `dockerignore` file by default. This command is available from docker-compose 1.25.1. If you have older version use the classical `docker-compose build` which may not take into account the `dockerignore` file.
+
+Next you can run the following command:
+
+```bash
+docker-compose up -d
+```
+
+This will make the two containers run in background.
+
+**Usage**
+
+After installation a web server will be available in your browser at http://localhost:3000. You can also use the previous commands described previously to create users and get user's data.
+
+**Testing**
+
+The test suite has not been included in the docker image. All test have been performed locally and then run on Travis CI before containerizing the app.
+
+
+
+### Installation & deployment with Kubernetes
+
+**Installation**
+
+To be able to install and deploy the app on a local Kubernetes cluster first check that `kubectl` (Kubernetes CLI) and `minikube` (CLI to set up local Kubernetes cluster) are installed in your system. I chose to run minikube with the docker driver (so check that docker is installed if you follow the same path) but if you prefer you can use others container / virtual machine managers.
+
+- Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- Install [minikube](https://minikube.sigs.k8s.io/docs/start/)
+- Install [docker](https://docs.docker.com/get-docker/)
+
+Once all required softwares are installed go to the root directory and run:
+
+```bash
+kubectl apply -f k8s_manifests_distinct
+```
+
+This will set up two distinct pods in our cluster. One pod will run our application container and the other one will run the Redis container. A persistent storage will be attributed to the Redis container.
+
+**Usage**
+
+To access the web server, create and get user data you first need to get IP address of the running cluster by using the following command:
+
+```bash
+minikube ip
+```
