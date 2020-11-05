@@ -28,7 +28,7 @@
 
   - [x] Create Docker image
   - [x] Push the image (https://hub.docker.com/repository/docker/fbraza/webapp-v1)
-  - [x] Ignore unnecessary files 
+  - [x] Ignore unnecessary files (`COMPOSE_DOCKER_CLI_BUILD=1 docker-compose build`)
 
 - [x] **Make container orchestration using Docker Compose**
 
@@ -37,6 +37,17 @@
   - [x] Attach volume to save database data
 
 - [ ] **Make docker orchestration using Kubernetes**
+
+  - [x] Install Kubernetes cluster using Minikube
+  - [x] Create Kubernetes deployment YAML file (test curl with minikube ssh)
+
+`kubectl exec full-app-5c669d49dd-hnxcd -- printenv` >> env variables 
+
+`kubectl get pods faouzi-webapp-55976475f9-94jv8 -o jsonpath='{.spec.containers[*].name}'`
+
+- [ ] Create Kubernetes service YAML files
+
+- [ ] Create Kubernetes persistent volume and persistent volume claim YAML files
 
 - [ ] **Make a service mesh using Istio**
 
