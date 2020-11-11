@@ -1,5 +1,0 @@
-Once on the VM run the test and use the following:
-- curl http://192.168.33.10:3000/user/fbraza
-
-This should return:
-{"status":"success","msg":{"firstname":"Faouzi","lastname":"Braza"}}

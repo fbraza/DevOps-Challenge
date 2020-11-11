@@ -1,3 +1,30 @@
+# DevOps Project
+
+Herein, the main project's objective is to make a web application go through the main CI/CD steps, deploy the app using (i) a virtual environment with vagrant, (ii) using docker and docker compose and (iii) Kubernetes. A list of completed tasks can be seen below:
+
+- [ ] **Complete the application code**
+  - [x] Start a web server
+  - [x] Create a user
+  - [x] Get user data
+  - [ ] Testing (One test missing in `test/user.router.js`)
+- [x] **Apply CI/CD**
+  - [x] Testing on Travis CI
+  - [x] Deployment on [Heroku](https://faouzi-app-devops.herokuapp.com/)
+- [ ] **Configure and provision a virtual environment and run your application using IaC approach**
+  - [x] Use vagrant
+  - [x] Provision the VM with Ansible to install and run (language runtime, database, git, ssh forwarding for private repository, app)
+  - [ ] Provision Ansible playbook for Healthchecks
+- [x] **Build Docker image of your application**
+  - [x] Create Docker image of your application
+  - [x] Push the image to Docker Hub
+- [x] **Make docker orchestration using Kubernetes**
+  - [x] Install Kubernetes cluster using Minikube
+  - [x] Create a Kubernetes Manifest yaml files
+- [ ] **Make a service mesh using Istio**
+- [x] **Describe your project in the `README.md` file**
+
+
+
 # User API web application
 
 It is a basic NodeJS web application exposing REST API that creates and stores user parameters in [Redis database](https://redis.io/).
@@ -7,18 +34,16 @@ It is a basic NodeJS web application exposing REST API that creates and stores u
 ## Functionality
 
 1. Start a web server
-
 2. Create a user
-
 3. Get user data
-
-   > to implement: Delete
 
 
 
 ## Installation and usage
 
 This application is written on NodeJS and it uses Redis database. There are different scenarios to install and run the application. See below for their descriptions.
+
+
 
 ### Local installation and usage
 
@@ -30,7 +55,7 @@ First check that both NodeJS and Redis are installed in your system. If not foll
 
 - [Install Redis](https://redis.io/download)
 
-Once done you can clone or download the repository. Once in the root directory of the application (where `package.json` file located) run the following command:
+Once done you can clone or download the repository. Once in the root directory of the application (where `package.json` file is located) run the following command:
 
 ```bash
 npm install
@@ -114,15 +139,15 @@ Next you can run the following command:
 docker-compose up -d
 ```
 
-This will make the two containers run in background.
+This will make the two containers running in background.
 
 **Usage**
 
-After installation a web server will be available in your browser at http://localhost:3000. You can also use the previous commands described previously to create users and get user's data.
+After installation, a web server will be available in your browser at http://localhost:3000. You can also use the previous commands described previously to create users and get user's data.
 
 **Testing**
 
-The test suite has not been included in the docker image. All test have been performed locally and then run on Travis CI before containerizing the app.
+The test suite has not been included in the docker image. All tests have been performed locally and then run on Travis CI before containerizing the app.
 
 
 
@@ -130,7 +155,7 @@ The test suite has not been included in the docker image. All test have been per
 
 **Installation**
 
-To be able to install and deploy the app on a local Kubernetes cluster first check that `kubectl` (Kubernetes CLI) and `minikube` (CLI to set up local Kubernetes cluster) are installed in your system. I chose to run minikube with the docker driver (so check that docker is installed if you follow the same path) but if you prefer you can use others container / virtual machine managers.
+To be able to install and deploy the app on a local Kubernetes cluster first check that `kubectl` (Kubernetes CLI) and `minikube` (CLI to set up local Kubernetes cluster) are installed in your system. I chose to run `minikube` with the `docker` driver (so check that docker is installed if you follow the same path) but if you prefer you can use others container / virtual machine managers.
 
 - Install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - Install [minikube](https://minikube.sigs.k8s.io/docs/start/)
@@ -138,29 +163,33 @@ To be able to install and deploy the app on a local Kubernetes cluster first che
 
 Once all required softwares are installed go to the root directory and run:
 
+```
+minikube start
+```
+
+This will build and start you local Kubernetes cluster. Then run:
+
 ```bash
 kubectl apply -f k8s_manifests_distinct
 ```
 
-This will set up two distinct pods in our cluster. One pod will run our application container and the other one will run the Redis container. A persistent storage will be attributed to the Redis container.
+This will set up two distinct pods in our cluster. One pod will run our application container and the other one will run the Redis container. A persistent storage will be attributed to the Redis container to save data.
 
 **Usage**
 
-To access the web server, create and get user data you first need to get the IP address of the running cluster. Because you are going to use it 
-several time in your `curl` command, you can save it in a variable by running the following command:
+To access the web server, create and get user data you first need to get the IP address of the running cluster. Because you are going to use it several time in your `curl` command, you can save it in a `bash` variable by running the following command:
 
 ```bash
 CLUSTER_IP=$(minikube ip)
 ```
 
-To expose the container in our pods we created Kubernetes services manifests and open a NodePort. To get the node port of our app we can run the
-following command:
+To expose the container in our pods we created Kubernetes services manifests and open some NodePort. To get the node port of our app we can run the following command:
 
 ```bash
 kubectl get svc
 ```
 
-This shoudl output something similar to:
+This should output something similar to:
 
 ```bash
 NAME                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
@@ -206,3 +235,6 @@ curl http://${CLUSTER_IP}:${PORT}/user/fbraza
 
 # Author
 Faouzi Braza
+
+ [faouzi.braza@edu.dsti.institute](mailto:faouzi.braza@edu.dsti.institute)
+

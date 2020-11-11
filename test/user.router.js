@@ -11,7 +11,7 @@ describe('User REST API', () => {
   before(() => {
     client = require('../src/dbClient')
   })
-  
+
   after(()=> {
     app.close()
     client.quit()
@@ -38,7 +38,7 @@ describe('User REST API', () => {
           throw err
         })
     })
-    
+
     it('pass wrong parameters', (done) => {
       const user = {
         firstname: 'Sergei',

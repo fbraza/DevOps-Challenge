@@ -49,10 +49,7 @@ describe('User', () => {
   })
 
    describe('Get', ()=> {
-     // TODO Create test for the get method
      it('get a user by username', (done) => {
-       // 1. First, create a user to make this unit test independent from the others
-       // 2. Then, check if the result of the get method is correct
        const user = {
            username: 'fbraza',
            firstname: 'Faouzi',

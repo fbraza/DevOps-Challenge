@@ -22,11 +22,7 @@ Vagrant.configure("2") do |config|
 
   config.ssh.forward_agent = true
   config.vm.provision "ansible_local" do |ansible|
-    # The path to the playbooks entry point
     ansible.playbook = "playbooks/run.yml"
-    # Only run the roles with these tags
-    # Ansible allows you to only run some parts of the code using tags
-    # Use the tag install if gitlab is not install in your VM
     ansible.tags = "install"
   end
 end
