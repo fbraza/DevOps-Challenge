@@ -13,6 +13,7 @@ node_modules/
 iac/
 test/
 k8s_manifests/
+assets/
 docker-compose.yml
 deployment.yml
 
