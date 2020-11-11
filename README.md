@@ -1,6 +1,6 @@
 # DevOps Project
 
-Herein, the main project's objective is to make a web application go through the main CI/CD steps, deploy the app using (i) a virtual environment with vagrant, (ii) using docker and docker compose and (iii) Kubernetes. A list of completed tasks can be seen below:
+Herein, the main project's objective is to make a web application go through the main CI/CD steps, to be deployed using (i) a virtual environment with vagrant, (ii) docker and docker compose and (iii) Kubernetes. A list of completed tasks can be seen below:
 
 - [ ] **Complete the application code**
   - [x] Start a web server
@@ -16,7 +16,7 @@ Herein, the main project's objective is to make a web application go through the
   - [ ] Provision Ansible playbook for Healthchecks
 - [x] **Build Docker image of your application**
   - [x] Create Docker image of your application
-  - [x] Push the image to Docker Hub
+  - [x] Push the [image](https://hub.docker.com/repository/docker/fbraza/webapp-v1) to Docker Hub. 
 - [x] **Make docker orchestration using Kubernetes**
   - [x] Install Kubernetes cluster using Minikube
   - [x] Create a Kubernetes Manifest yaml files
@@ -105,6 +105,61 @@ It will output:
 **Testing**
 
 From the root directory of the project, run:
+
+```bash
+npm test
+```
+
+
+
+### Installation and usage in a virtual machine
+
+**Installation**
+
+First check that `Virtual Box` and `Vagrant` are installed in your system:
+
+- Install [Virtual Box](https://www.virtualbox.org/manual/ch02.html)
+- install [Vagrant](https://www.vagrantup.com/docs/installation)
+
+Once done, open a terminal inside the `iac` folder,  and run the following command:
+
+```bash
+vagrant up
+```
+
+This will fire-up a virtual machine with a CentOS/7 installation. Additionally this will install all required packages, software and run necessary services (notably Redis database). At the end of the process you should have something a bit similar to this:
+
+![vagrant](/home/fbraza/Pictures/Screenshot from 2020-11-11 09-28-54.png)
+
+**Usage**
+
+To enter the VM use, stay inside the `iac` folder and run:
+
+```bash
+vagrant ssh
+```
+
+You can then move to the cloned repository using the following command:
+
+```bash
+cd private-repo
+```
+
+Once inside the folder you can basically do what you would do locally:
+
+```bash
+# First install node packages
+npm install
+
+# run the webserver
+npm start
+```
+
+Once the web server started you can access the app in your browser using the following link http://localhost:3000/ . The difficulty here is that when started the terminal is occupied. So if you want to `curl` you app just open a second terminal and `ssh` again inside the VM. From there you can create and get users' data.
+
+**Testing**
+
+In your VM move to the `private-repo` folder and run:
 
 ```bash
 npm test
