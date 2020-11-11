@@ -129,7 +129,7 @@ vagrant up
 
 This will fire-up a virtual machine with a CentOS/7 installation. Additionally this will install all required packages, software and run necessary services (notably Redis database). At the end of the process you should have something a bit similar to this:
 
-![vagrant](/home/fbraza/Pictures/Screenshot from 2020-11-11 09-28-54.png)
+![vagrant](https://github.com/fbraza/devops-project-dsti-fall-2020/blob/main/assets/vagrant.png)
 
 **Usage**
 
